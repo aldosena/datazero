@@ -1,15 +1,64 @@
 <?php
 # autor: aldosena10@gmail.com
-# atualização em: 2020 - 09 - 24
-#- 2020-09-24 = retorno "" se não consegir converter para BR 
-#- 2020-09-24 = o datacertadma agora aceita / ou -
+# atualização em: 2021 - 09 - 21
+# histórico:
+#- 21-09-2021 = criada a funçao datafinal(....
+#- 24-09-2020 = retorno "" se não consegir converter para BR 
+#- 24-09-2020 = o datacertadma agora aceita / ou -
 # Objetivo: Funçoes com datas (PHP7)
 
 $codigododia = array("DOM" => "1", "SEG" => "2", "TER" => "3", "QUA" => "4", "QUI" => "5", "SEX" => "6", "SAB" => "7");
 $ameses = array(1 => "Janeiro", 2 => "Fevereiro", 3 => "Março", 4 => "Abril", 5 => "Março", 6 => "Junho", 7 => "Julho", 8 => "Agosto", 9 => "Setembro", 10 => "Outubro", 11 => "Novembro", 12 => "Dezembro");
 $ams = array(1 => "Jan", 2 => "Fev", 3 => "Mar", 4 => "Abr", 5 => "Mar", 6 => "Jun", 7 => "Jul", 8 => "Ago", 9 => "Set", 10 => "Out", 11 => "Nov", 12 => "Dez");
 
+# esta função recebe data no formato no formato us ou br
+# e retorna no formato escolhido us ou br.
+
+function datafinal($dx, $ssigla){   
+     $ssaida = strtoupper($ssigla);   
+     if ($ssaida != "BR"){ // se nao definir o padrão, gera zero
+	 if ($ssaida != "US"){
+		 return "00-00-00";
+		 exit;
+	 };
+	 };	 
+	 // separa valores da data recebida
+	 $d = str_replace("/", "-", $dx); // trocar / por -
+	 $di = explode("-",$d); // separa a data em 3 partes
+
+	 //se o 1º intervalo tiver 1 ou 2 letras, é o dia no formato d/m/a (br)
+     if (strlen($di[0]) < 3){ $dformato = "BR"; }else{ $dformato = "US"; };
+	 
+	 // se a data recebida for america
+	 if ($dformato == "US"){	 
+	    $d = intval($di[2]);
+	    $m = intval($di[1]);
+	    $a = intval($di[0]);	
+	 };
+	 //se a data recebida for brasileira
+	 if ($dformato == "BR"){	 
+	    $d = intval($di[0]);
+	    $m = intval($di[1]);
+	    $a = intval($di[2]);	
+	 };
+	 // confere se a data está correta
+	 if (checkdate($m,$d,$a) == false){ // checo se é valido
+			return "00-00-00";
+			exit;
+	 };	
+     // exibir final
+	 if ($ssaida == "US"){
+	        $f = $a."-".$m."-".$d;
+	}else{
+	        $f = $d."/".$m."/".$a;
+	};// ame
+	return $f;  
+};
+// exemplo de uso: $gravanobanco = datafinal($dataescolhida,"us");
+
 # esta função recebe e retorna uma data no formato brasileiro ou americano
+# esta função está obsoleta e será exclída em 2022
+# usar a função acima: datafinal(
 function datazero($pini, $dx, $pfini){   
 	$pi = strtoupper($pini);
     if ($pi != "BR"){ // se nao definir o padrão, gera zero
