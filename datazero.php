@@ -1,6 +1,6 @@
 <?php
 # autor: aldosena10@gmail.com
-# atualização em: 2021 - 09 - 21
+# atualização em: 07/10/2021
 # histórico:
 #- 21-09-2021 = criada a funçao datafinal(....
 #- 24-09-2020 = retorno "" se não consegir converter para BR 
@@ -15,45 +15,44 @@ $ams = array(1 => "Jan", 2 => "Fev", 3 => "Mar", 4 => "Abr", 5 => "Mar", 6 => "J
 # e retorna no formato escolhido us ou br.
 
 function datafinal($dx, $ssigla){   
-     $ssaida = strtoupper($ssigla);   
-     if ($ssaida != "BR"){ // se nao definir o padrão, gera zero
-	 if ($ssaida != "US"){
+  $ssaida = strtoupper($ssigla);   
+  if ($ssaida != "BR"){ // se nao definir o padrão, gera zero
+    if ($ssaida != "US"){
 		 return "00-00-00";
 		 exit;
-	 };
-	 };	 
-	 // separa valores da data recebida
-	 $d = str_replace("/", "-", $dx); // trocar / por -
-	 $di = explode("-",$d); // separa a data em 3 partes
+    };
+  };	 
+  // separa valores da data recebida
+  $d = str_replace("/", "-", $dx); // trocar / por -
+  $di = explode("-",$d); // separa a data em 3 partes
 
-	 //se o 1º intervalo tiver 1 ou 2 letras, é o dia no formato d/m/a (br)
-     if (strlen($di[0]) < 3){ $dformato = "BR"; }else{ $dformato = "US"; };
-	 
-	 // se a data recebida for america
-	 if ($dformato == "US"){	 
+  //se o 1º intervalo tiver 1 ou 2 letras, é o dia no formato d/m/a (br)
+  if (strlen($di[0]) < 3){ $dformato = "BR"; }else{ $dformato = "US"; };	 
+  // se a data recebida for america
+  if ($dformato == "US"){	 
 	    $d = intval($di[2]);
 	    $m = intval($di[1]);
 	    $a = intval($di[0]);	
-	 };
-	 //se a data recebida for brasileira
-	 if ($dformato == "BR"){	 
+  };
+  //se a data recebida for brasileira
+  if ($dformato == "BR"){	 
 	    $d = intval($di[0]);
 	    $m = intval($di[1]);
 	    $a = intval($di[2]);	
-	 };
-	 // confere se a data está correta
-	 if (checkdate($m,$d,$a) == false){ // checo se é valido
+  };
+  // confere se a data está correta
+  if (checkdate($m,$d,$a) == false){ // checo se é valido
 			return "00-00-00";
 			exit;
-	 };	
-     // exibir final
-	 if ($ssaida == "US"){
+  };	
+  // exibir final
+  if ($ssaida == "US"){
 	        $f = $a."-".$m."-".$d;
-	}else{
+  }else{
 	        $f = $d."/".$m."/".$a;
-	};// ame
-	return $f;  
-};
+  };// ame
+  return $f;  
+ };
 // exemplo de uso: $gravanobanco = datafinal($dataescolhida,"us");
 
 # esta função recebe e retorna uma data no formato brasileiro ou americano
@@ -107,12 +106,11 @@ function datazero($pini, $dx, $pfini){
 	    };
 	 };// invalido
 	 return $f;  
-};
+}; // fim datazero
 // exemplo: $gravabanco = datazero("br",$dataescolhida,"us");
 
 #  soma MESES a uma data
 function soma_dma($dma, $qt){ 
-	
      $q = intval($qt);
 	 // separa valores
 	 $v = str_replace("/", "-", $dma); // aceita / ou -
@@ -179,6 +177,14 @@ function vertimestamp($dts){
   return $r;
 };
 
+# pega um campo timestamp (2017-04-13 00:00:00) no banco de dados e exibe as horas
+function VerHora($dts){
+  $h = substr($dts, 11, 2);
+  $i = substr($dts, 14, 2);
+  $r = $h.":".$i." h";
+  return $r;
+};
+
 # calcula em anos a data de uma pessoa 21/09/1970
 function Calcula_Idade($diaaniv){
 	$da = explode("/",$diaaniv); // fatia a string $dat em pedados, usando / como referência
@@ -195,4 +201,3 @@ function Calcula_Idade($diaaniv){
 };
 
 ?>
-
