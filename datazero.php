@@ -1,6 +1,7 @@
 <?php
 # autor: aldosena10@gmail.com
 # atualização em: 02/12/2021
+# disponível em: https://github.com/aldosena/datazero
 # histórico:
 # 02-12-2021 = a funcao diaextenso( recebe uma melhoria para aceitar barra ou traço	 
 # 21-09-2021 = criada a funçao datafinal(....
