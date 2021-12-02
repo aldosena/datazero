@@ -1,10 +1,11 @@
 <?php
 # autor: aldosena10@gmail.com
-# atualização em: 07/10/2021
+# atualização em: 02/12/2021
 # histórico:
-#- 21-09-2021 = criada a funçao datafinal(....
-#- 24-09-2020 = retorno "" se não consegir converter para BR 
-#- 24-09-2020 = o datacertadma agora aceita / ou -
+# 02-12-2021 = a funcao diaextenso( recebe uma melhoria para aceitar barra ou traço	 
+# 21-09-2021 = criada a funçao datafinal(....
+# 24-09-2020 = retorno "" se não consegir converter para BR 
+# 24-09-2020 = o datacertadma agora aceita / ou -
 # Objetivo: Funçoes com datas (PHP7)
 
 $codigododia = array("DOM" => "1", "SEG" => "2", "TER" => "3", "QUA" => "4", "QUI" => "5", "SEX" => "6", "SAB" => "7");
@@ -141,7 +142,8 @@ function datacertadma($dtc){
 # pega o padrão brasileiro
 function diaextenso($dix){	
 	$mex = array(1 => "Janeiro", 2 => "Fevereiro", 3 => "Março", 4 => "Abril", 5 => "Março", 6 => "Junho", 7 => "Julho", 8 => "Agosto", 9 => "Setembro", 10 => "Outubro", 11 => "Novembro", 12 => "Dezembro");
-	$data = explode("/","$dix"); // fatia a string $dat em pedados, usando / como referência
+	$dxx = str_replace("/", "-", $dix); // aceita / ou -
+	$data = explode("-","$dxx"); // fatia a string $dat em pedados, usando / como referência
 	$d = $data[0];
 	$m = $data[1];
 	$y = $data[2];
