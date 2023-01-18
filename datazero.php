@@ -1,8 +1,9 @@
 <?php
 # autor: aldosena10@gmail.com
-# atualização em: 02/12/2021
+# atualização em: 18/01/2023
 # disponível em: https://github.com/aldosena/datazero
 # histórico:
+# 18-01-2023 - codigo ficou mais simples
 # 02-12-2021 = a funcao diaextenso( recebe uma melhoria para aceitar barra ou traço	 
 # 21-09-2021 = criada a funçao datafinal(....
 # 24-09-2020 = retorno "" se não consegir converter para BR 
@@ -13,100 +14,75 @@ $codigododia = array("DOM" => "1", "SEG" => "2", "TER" => "3", "QUA" => "4", "QU
 $ameses = array(1 => "Janeiro", 2 => "Fevereiro", 3 => "Março", 4 => "Abril", 5 => "Maio", 6 => "Junho", 7 => "Julho", 8 => "Agosto", 9 => "Setembro", 10 => "Outubro", 11 => "Novembro", 12 => "Dezembro");
 $ams = array(1 => "Jan", 2 => "Fev", 3 => "Mar", 4 => "Abr", 5 => "Mar", 6 => "Jun", 7 => "Jul", 8 => "Ago", 9 => "Set", 10 => "Out", 11 => "Nov", 12 => "Dez");
 
-# esta função recebe data no formato no formato us ou br
-# e retorna no formato escolhido us ou br.
-
-function datafinal($dx, $ssigla){   
-  $ssaida = strtoupper($ssigla);   
-  if ($ssaida != "BR"){ // se nao definir o padrão, gera zero
-    if ($ssaida != "US"){
-		 return "00-00-00";
-		 exit;
-    };
-  };	 
-  // separa valores da data recebida
-  $d = str_replace("/", "-", $dx); // trocar / por -
-  $di = explode("-",$d); // separa a data em 3 partes
-
-  //se o 1º intervalo tiver 1 ou 2 letras, é o dia no formato d/m/a (br)
-  if (strlen($di[0]) < 3){ $dformato = "BR"; }else{ $dformato = "US"; };	 
-  // se a data recebida for america
-  if ($dformato == "US"){	 
-	    $d = intval($di[2]);
-	    $m = intval($di[1]);
-	    $a = intval($di[0]);	
+function datafinal($dx, $xsaida){   
+# esta função recebe data no formato no formato us ou br e retorna no formato escolhido us ou br.
+# se exporta para us, recebeu br! se exporta para br, recebeu us!
+if (strtoupper($xsaida) == "US"){ 
+	$xentrada = "BR";
+}else{
+        $xentrada = "US";
+};	
+		 
+// separa valores da data recebida
+$d = str_replace("/", "-", $dx); // trocar / por - se houver
+$dia = explode("-",$d); // separa as partes
+	
+  if ($xentrada == "US"){	 
+	    $d = intval($dia[2]);
+	    $m = intval($dia[1]);
+	    $a = intval($dia[0]);	
   };
-  //se a data recebida for brasileira
-  if ($dformato == "BR"){	 
-	    $d = intval($di[0]);
-	    $m = intval($di[1]);
-	    $a = intval($di[2]);	
+
+  if ($xentrada == "BR"){	 
+	    $d = intval($dia[0]);
+	    $m = intval($dia[1]);
+	    $a = intval($dia[2]);	
   };
+	
   // confere se a data está correta
-  if (checkdate($m,$d,$a) == false){ // checo se é valido
-			return "00-00-00";
-			exit;
-  };	
-  // exibir final
-  if ($ssaida == "US"){
+  if (checkdate($m,$d,$a)){ // se é valido
+      if ($xsaida == "US"){
 	        $f = $a."-".$m."-".$d;
-  }else{
+      }else{
 	        $f = $d."/".$m."/".$a;
-  };// ame
-  return $f;  
- };
+      };// se saida  
+  }else{	
+    $f = "0-0-0";
+  };//se invalido
+	
+return $f;  
+ };// fim funcçao
+	
+	
 // exemplo de uso: $gravanobanco = datafinal($dataescolhida,"us");
 
-# esta função recebe e retorna uma data no formato brasileiro ou americano
-# esta função está obsoleta e será exclída em 2022
-# usar a função acima: datafinal(
 function datazero($pini, $dx, $pfini){   
-	$pi = strtoupper($pini);
-    if ($pi != "BR"){ // se nao definir o padrão, gera zero
-	if ($pi != "US"){
-		 return "";
-		 exit;
-	 };
-	 };
-     $pf = strtoupper($pfini);   
-     if ($pf != "BR"){ // se nao definir o padrão, gera zero
-	 if ($pf != "US"){
-		 return "";
-		 exit;
-	 };
-	 };	 
-	 // separa valores da data recebida
-	 $d = str_replace("/", "-", $dx); // aceita / ou -
-	 $di = explode("-",$d); // separa
-	 if (intval($di[0]) == 0){ // se não houver inteiro
-		 return "";
-		 exit;		 
-	 };
-	 // se for entrada america
-	 if ($pi == "US"){	 
+# esta função recebe e retorna uma data no formato brasileiro ou americano
+  $pi = strtoupper($pini);
+  $pf = strtoupper($pfini);   
+	 
+ // separa valores da data recebida
+ $d = str_replace("/", "-", $dx); // aceita / ou -
+ $di = explode("-",$d); // separa
+ // se for entrada america
+ if ($pi == "US"){	 
 	    $d = intval($di[2]);
 	    $m = intval($di[1]);
 	    $a = intval($di[0]);	
-	 };
-	 //se a entrada for brasileira
-	 if ($pi == "BR"){	 
+ };
+ //se a entrada for brasileira
+ if ($pi == "BR"){	 
 	    $d = intval($di[0]);
 	    $m = intval($di[1]);
 	    $a = intval($di[2]);	
-	 };
-	 if (checkdate($m,$d,$a) == true){ // checo se é valido
+ };
+ if (checkdate($m,$d,$a) == true){ // checo se é valido
 	    if ($pf == "US"){
 	        $f = $a."-".$m."-".$d;
 	    } else {
 	        $f = $d."/".$m."/".$a;
 	    };// ame
-	 }else{ //se não for válido...
-	    if ($pf == "US"){
-	        $f = "0000-00-00";
-	    } else {
-	        $f = "";
-	    };
-	 };// invalido
+};// se valido
 	 return $f;  
 }; // fim datazero
 // exemplo: $gravabanco = datazero("br",$dataescolhida,"us");
