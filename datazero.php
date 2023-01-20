@@ -10,7 +10,9 @@
 # Objetivo: Funçoes com datas (PHP7)
 
 // menusculo em desuso
-$CODIGODODIA = array("DOM" => "1", "SEG" => "2", "TER" => "3", "QUA" => "4", "QUI" => "5", "SEX" => "6", "SAB" => "7");
+$DIADASEMANA = array(1 => "DOMINGO", 2 => "SEGUNDA", 3 => "TERÇA", 4 => "QUARTA", 5 => "QUINTA", 6 => "SEXTA", 7 => "SÁBADO");
+$CODDODIA = array("DOM" => "1", "SEG" => "2", "TER" => "3", "QUA" => "4", "QUI" => "5", "SEX" => "6", "SAB" => "7");
+
 $codigododia = array("DOM" => "1", "SEG" => "2", "TER" => "3", "QUA" => "4", "QUI" => "5", "SEX" => "6", "SAB" => "7");
 
 $AMESES = array(1 => "Janeiro", 2 => "Fevereiro", 3 => "Março", 4 => "Abril", 5 => "Maio", 6 => "Junho", 7 => "Julho", 8 => "Agosto", 9 => "Setembro", 10 => "Outubro", 11 => "Novembro", 12 => "Dezembro");
