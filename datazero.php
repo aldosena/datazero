@@ -3,6 +3,7 @@
 # atualização em: 18/01/2023
 # disponível em: https://github.com/aldosena/datazero
 # histórico:
+# 30-01-2023 - a funcao "MaisDH" foi criada
 # 18-01-2023 - codigo ficou mais simples
 # 02-12-2021 = a funcao diaextenso( recebe uma melhoria para aceitar barra ou traço	 
 # 21-09-2021 = criada a funçao datafinal(....
