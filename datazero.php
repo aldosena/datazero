@@ -21,6 +21,23 @@ $ameses = array(1 => "Janeiro", 2 => "Fevereiro", 3 => "Março", 4 => "Abril", 5
 $AMS = array(1 => "Jan", 2 => "Fev", 3 => "Mar", 4 => "Abr", 5 => "Mar", 6 => "Jun", 7 => "Jul", 8 => "Ago", 9 => "Set", 10 => "Out", 11 => "Nov", 12 => "Dez");
 $ams = array(1 => "Jan", 2 => "Fev", 3 => "Mar", 4 => "Abr", 5 => "Mar", 6 => "Jun", 7 => "Jul", 8 => "Ago", 9 => "Set", 10 => "Out", 11 => "Nov", 12 => "Dez");
 
+// função que soma uma dia ou uma hora a uma data específica
+function MaisDH($inicial, $dd, $hh){
+  // quer acrescentar um dia, coloque em $dd
+  // quer acrescentar uma hora, coloque em $hh
+  // quecra a tada no foramto timestamp - yyyy-mm-dd hh:nn:ss
+  $dia = substr($inicial, 8, 2); 
+  $mes = substr($inicial, 5, 2); 
+  $ano = substr($inicial, 0, 4); 
+  $hora = substr($inicial, 11, 2);
+  $minuto = substr($inicial, 14, 2);
+  $segundo = 0;
+  $re = mktime(($hora + $hh), $minuto, $segundo, $mes, ($dia + $dd), $ano);
+  $r = date("Y-m-d H:i:s", $re);
+  return $r;   
+}; 
+// exemplo de uso: $futuro =  MaisDH($h, 1, 0);
+
 function datafinal($dx, $xsaida){   
 # esta função recebe data no formato no formato us ou br e retorna no formato escolhido us ou br.
 # se exporta para us, recebeu br! se exporta para br, recebeu us!
