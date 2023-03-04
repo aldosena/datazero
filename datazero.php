@@ -12,6 +12,8 @@
 
 // menusculo em desuso
 $DIADASEMANA = array(1 => "DOMINGO", 2 => "SEGUNDA", 3 => "TERÇA", 4 => "QUARTA", 5 => "QUINTA", 6 => "SEXTA", 7 => "SÁBADO");
+$CODDASEMANA = array(1 => "DOM", 2 => "SEG", 3 => "TER", 4 => "QUA", 5 => "QUI", 6 => "SEX", 7 => "SÁB");
+
 $CODDODIA = array("DOM" => "1", "SEG" => "2", "TER" => "3", "QUA" => "4", "QUI" => "5", "SEX" => "6", "SAB" => "7");
 
 $codigododia = array("DOM" => "1", "SEG" => "2", "TER" => "3", "QUA" => "4", "QUI" => "5", "SEX" => "6", "SAB" => "7");
