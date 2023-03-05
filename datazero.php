@@ -83,8 +83,8 @@ return $f;
 	
 // exemplo de uso: $gravanobanco = datafinal($dataescolhida,"us");
 
-function datazero($pini, $dx, $pfini){   
 # esta função recebe e retorna uma data no formato brasileiro ou americano
+function datazero($pini, $dx, $pfini){   
   $pi = strtoupper($pini);
   $pf = strtoupper($pfini);   
 	 
@@ -93,15 +93,15 @@ function datazero($pini, $dx, $pfini){
  $di = explode("-",$d); // separa
  // se for entrada america
  if ($pi == "US"){	 
-	    $d = intval($di[2]);
-	    $m = intval($di[1]);
-	    $a = intval($di[0]);	
+	    $d = $di[2];
+	    $m = $di[1];
+	    $a = $di[0];	
  };
  //se a entrada for brasileira
  if ($pi == "BR"){	 
-	    $d = intval($di[0]);
-	    $m = intval($di[1]);
-	    $a = intval($di[2]);	
+	    $d = $di[0];
+	    $m = $di[1];
+	    $a = $di[2];	
  };
  if (checkdate($m,$d,$a) == true){ // checo se é valido
 	    if ($pf == "US"){
