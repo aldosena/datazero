@@ -1,8 +1,10 @@
 <?php
 # autor: aldosena10@gmail.com
-# atualização em: 18/01/2023
+# atualização em: 18/12/2023
 # disponível em: https://github.com/aldosena/datazero
 # histórico:
+
+# 03-12-2023 - arrays com letras menusculas foram apagadas
 # 30-01-2023 - a funcao "MaisDH" foi criada
 # 18-01-2023 - codigo ficou mais simples
 # 02-12-2021 = a funcao diaextenso( recebe uma melhoria para aceitar barra ou traço	 
@@ -16,13 +18,9 @@ $CODDASEMANA = array(1 => "DOM", 2 => "SEG", 3 => "TER", 4 => "QUA", 5 => "QUI",
 
 $CODDODIA = array("DOM" => "1", "SEG" => "2", "TER" => "3", "QUA" => "4", "QUI" => "5", "SEX" => "6", "SAB" => "7");
 
-$codigododia = array("DOM" => "1", "SEG" => "2", "TER" => "3", "QUA" => "4", "QUI" => "5", "SEX" => "6", "SAB" => "7");
-
 $AMESES = array(1 => "Janeiro", 2 => "Fevereiro", 3 => "Março", 4 => "Abril", 5 => "Maio", 6 => "Junho", 7 => "Julho", 8 => "Agosto", 9 => "Setembro", 10 => "Outubro", 11 => "Novembro", 12 => "Dezembro");
-$ameses = array(1 => "Janeiro", 2 => "Fevereiro", 3 => "Março", 4 => "Abril", 5 => "Maio", 6 => "Junho", 7 => "Julho", 8 => "Agosto", 9 => "Setembro", 10 => "Outubro", 11 => "Novembro", 12 => "Dezembro");
 
 $AMS = array(1 => "Jan", 2 => "Fev", 3 => "Mar", 4 => "Abr", 5 => "Mar", 6 => "Jun", 7 => "Jul", 8 => "Ago", 9 => "Set", 10 => "Out", 11 => "Nov", 12 => "Dez");
-$ams = array(1 => "Jan", 2 => "Fev", 3 => "Mar", 4 => "Abr", 5 => "Mar", 6 => "Jun", 7 => "Jul", 8 => "Ago", 9 => "Set", 10 => "Out", 11 => "Nov", 12 => "Dez");
 
 // função que soma uma dia ou uma hora a uma data específica
 function MaisDH($inicial, $dd, $hh){
