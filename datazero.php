@@ -1,26 +1,21 @@
+
 <?php
 # autor: aldosena10@gmail.com
-# atualização em: 18/12/2023
+# atualização em: 18/01/2023
 # disponível em: https://github.com/aldosena/datazero
-# histórico:
-
-# 03-12-2023 - arrays com letras menusculas foram apagadas
-# 30-01-2023 - a funcao "MaisDH" foi criada
-# 18-01-2023 - codigo ficou mais simples
-# 02-12-2021 = a funcao diaextenso( recebe uma melhoria para aceitar barra ou traço	 
-# 21-09-2021 = criada a funçao datafinal(....
-# 24-09-2020 = retorno "" se não consegir converter para BR 
 # Objetivo: Funçoes com datas (PHP7)
 
 // menusculo em desuso
 $DIADASEMANA = array(1 => "DOMINGO", 2 => "SEGUNDA", 3 => "TERÇA", 4 => "QUARTA", 5 => "QUINTA", 6 => "SEXTA", 7 => "SÁBADO");
 $CODDASEMANA = array(1 => "DOM", 2 => "SEG", 3 => "TER", 4 => "QUA", 5 => "QUI", 6 => "SEX", 7 => "SÁB");
-
 $CODDODIA = array("DOM" => "1", "SEG" => "2", "TER" => "3", "QUA" => "4", "QUI" => "5", "SEX" => "6", "SAB" => "7");
-
+$codigododia = array("DOM" => "1", "SEG" => "2", "TER" => "3", "QUA" => "4", "QUI" => "5", "SEX" => "6", "SAB" => "7");
 $AMESES = array(1 => "Janeiro", 2 => "Fevereiro", 3 => "Março", 4 => "Abril", 5 => "Maio", 6 => "Junho", 7 => "Julho", 8 => "Agosto", 9 => "Setembro", 10 => "Outubro", 11 => "Novembro", 12 => "Dezembro");
-
+$ameses = array(1 => "Janeiro", 2 => "Fevereiro", 3 => "Março", 4 => "Abril", 5 => "Maio", 6 => "Junho", 7 => "Julho", 8 => "Agosto", 9 => "Setembro", 10 => "Outubro", 11 => "Novembro", 12 => "Dezembro");
+// diário de classe
+$AMES = array("01" => "Janeiro", "02" => "Fevereiro", "03" => "Março", "04" => "Abril", "05" => "Maio", "06" => "Junho", "07" => "Julho", "08" => "Agosto", "09" => "Setembro", "10" => "Outubro", "11" => "Novembro", "12" => "Dezembro");
 $AMS = array(1 => "Jan", 2 => "Fev", 3 => "Mar", 4 => "Abr", 5 => "Mar", 6 => "Jun", 7 => "Jul", 8 => "Ago", 9 => "Set", 10 => "Out", 11 => "Nov", 12 => "Dez");
+$ams = array(1 => "Jan", 2 => "Fev", 3 => "Mar", 4 => "Abr", 5 => "Mar", 6 => "Jun", 7 => "Jul", 8 => "Ago", 9 => "Set", 10 => "Out", 11 => "Nov", 12 => "Dez");
 
 // função que soma uma dia ou uma hora a uma data específica
 function MaisDH($inicial, $dd, $hh){
@@ -40,17 +35,16 @@ function MaisDH($inicial, $dd, $hh){
 // exemplo de uso: $futuro =  MaisDH($h, 1, 0);
 
 function datafinal($dx, $xsaida){   
-# esta função recebe data no formato no formato us ou br e retorna no formato escolhido us ou br.
-# se exporta para us, recebeu br! se exporta para br, recebeu us!
-if (strtoupper($xsaida) == "US"){ 
-	$xentrada = "BR";
-}else{
+	# esta função recebe data no formato no formato us ou br e retorna no formato escolhido us ou br.
+	# se exporta para us, recebeu br! se exporta para br, recebeu us!
+	if (strtoupper($xsaida) == "US"){ 
+			$xentrada = "BR";
+	}else{
         $xentrada = "US";
-};	
-		 
-// separa valores da data recebida
-$d = str_replace("/", "-", $dx); // trocar / por - se houver
-$dia = explode("-",$d); // separa as partes
+	};		 
+	// separa valores da data recebida
+	$d = str_replace("/", "-", $dx); // trocar / por - se houver
+	$dia = explode("-",$d); // separa as partes
 	
   if ($xentrada == "US"){	 
 	    $d = intval($dia[2]);
@@ -73,15 +67,20 @@ $dia = explode("-",$d); // separa as partes
       };// se saida  
   }else{	
     $f = "0-0-0";
-  };//se invalido
-	
-return $f;  
- };// fim funcçao
+  };//se invalido	
+	return $f;  
+};// fim funcçao
 	
 	
 // exemplo de uso: $gravanobanco = datafinal($dataescolhida,"us");
 
-# esta função recebe e retorna uma data no formato brasileiro ou americano
+/**
+ * esta função recebe e retorna uma data no formato brasileiro ou americano
+ * @param string $pini us ou br;
+ * @param string $dx data recebida;
+ * @param string $pfini us ou br;
+ * @return string data no formato br ou us;
+ */
 function datazero($pini, $dx, $pfini){   
   $pi = strtoupper($pini);
   $pf = strtoupper($pfini);   
@@ -101,6 +100,7 @@ function datazero($pini, $dx, $pfini){
 	    $m = $di[1];
 	    $a = $di[2];	
  };
+ $f = "";
  if (checkdate($m,$d,$a) == true){ // checo se é valido
 	    if ($pf == "US"){
 	        $f = $a."-".$m."-".$d;
@@ -111,6 +111,7 @@ function datazero($pini, $dx, $pfini){
 	 return $f;  
 }; // fim datazero
 // exemplo: $gravabanco = datazero("br",$dataescolhida,"us");
+
 
 #  soma MESES a uma data
 function soma_dma($dma, $qt){ 
@@ -140,6 +141,18 @@ function datacertadma($dtc){
   return $r;
 }
 //if (datacertadma("31/02/2002") == 0) { // 1 = true (válida), 0 = false (inválida) *coloque " aspas
+
+# checa se a data no formato Ymd está correta
+function datacertaYmd($dtc){
+	$dx = str_replace("/", "-", $dtc); // aceita / ou -
+	$data = explode("-","$dx"); // fatia a string
+	$y = $data[0];
+	$m = $data[1];
+	$d = $data[2];
+	$r = checkdate($m,$d,$y);
+  return $r;
+}
+//if (datacertadma("2002/01/20") == 0) { // 1 = true (válida), 0 = false (inválida) *coloque " aspas
 
 # pega o padrão brasileiro
 function diaextenso($dix){	
@@ -203,5 +216,57 @@ function Calcula_Idade($diaaniv){
 	if (intval($mesatual) >= intval($mes_cli)){ $Rano += 1; }; //se passou ou chegou no mes de aniversário
 	return $Rano;
 };
+
+/**
+ * Esta função pega os dados diretamente o banco e exibe no formato BR
+ */
+function dataBR($dateUSA){
+	if($dateUSA != ""){
+	$ano = substr($dateUSA, 0, 4);
+	$mes = substr($dateUSA, 5, 2);
+	$dia = substr($dateUSA, 8, 2);
+	$dateBR = $dia . '/' . $mes . '/' . $ano;
+	return $dateBR;
+	} else {
+	return "";
+	};
+}
+
+/**
+ * Recebe uma string e converte para o formato americano
+ * Retorna 0 (zero) se houver erro
+ */
+function dataUS($dateBR){
+	if ($dateBR != ""){
+			$ano = substr($dateBR, 6, 4);
+			$mes = substr($dateBR, 3, 2);
+			$dia = substr($dateBR, 0, 2);
+			// validar
+			if (checkdate($mes,$dia,$ano)){ 
+					$r = $ano . '-' . $mes . '-' . $dia;
+			}else{
+					$r = 0;
+			}; // if check		
+	}else{  
+		$r = 0; // vazio
+	}; // se nao tem texto
+	return $r;
+} // func
+
+
+/**
+ * Use quando a variável data é confiavel
+ */
+function dateToUs($diaBR){
+	if ($diaBR != ""){
+	$ano = substr($diaBR, 6, 4);
+	$mes = substr($diaBR, 3, 2);
+	$dia = substr($diaBR, 0, 2);
+	$dateUSA = $ano . '-' . $mes . '-' . $dia;
+	return $dateUSA;
+	} else {
+	return "";
+	}
+}
 
 ?>
